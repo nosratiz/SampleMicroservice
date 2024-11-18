@@ -181,44 +181,40 @@ services.AddMassTransit(x =>
 ### Unit Tests
 
 ```csharp
-public class CreateItemCommandHandlerTests
-{
-    [Fact]
-    public async Task Handle_ValidCommand_ReturnsId()
+ [Fact]
+    public void User_Creation_Should_Set_Properties_Correctly()
     {
-        // Arrange
-        var repository = new Mock<IMongoRepository<Item>>();
-        var handler = new CreateItemCommandHandler(repository.Object);
-        var command = new CreateItemCommand { Name = "Test Item" };
-        
-        // Act
-        var result = await handler.Handle(command, CancellationToken.None);
-        
-        // Assert
-        Assert.NotEqual(Guid.Empty, result);
+        var email = "test@example.com";
+        var password = "password";
+        var firstName = "John";
+        var lastName = "Doe";
+
+        var user = new User(email, password, firstName, lastName);
+
+        user.Email.Should().Be(email);
+        user.FirstName.Should().Be(firstName);
+        user.LastName.Should().Be(lastName);
+        user.Status.Should().Be(Status.Inactive);
+        user.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
     }
-}
 ```
 
 ### Integration Tests
 
 ```csharp
-public class ItemsControllerTests : IClassFixture<WebApplicationFactory<Program>>
+public sealed class ProductsEndpointTest(CustomWebApplicationFactory<Program> factory)
+    : IClassFixture<CustomWebApplicationFactory<Program>>
 {
+    private readonly HttpClient _client = factory.CreateClient();
+
     [Fact]
-    public async Task CreateItem_ValidRequest_ReturnsCreated()
+    public async Task GetAllProducts_Should_Return_Ok()
     {
-        // Arrange
-        var client = _factory.CreateClient();
-        var command = new CreateItemCommand { Name = "Test" };
-        
-        // Act
-        var response = await client.PostAsJsonAsync("/api/items", command);
-        
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        var response = await _client.GetAsync("/api/products");
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
+
 }
 ```
 
