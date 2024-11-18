@@ -7,12 +7,12 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Frontliners.Identity/Frontliners.Identity.csproj", "src/Frontliners.Identity/"]
-COPY ["shared/Frontliners.Common/Frontliners.Common.csproj", "shared/Frontliners.Common/"]
-COPY ["shared/Frontliners.Contract/Frontliners.Contract.csproj", "shared/Frontliners.Contract/"]
-RUN dotnet restore "src/Frontliners.Identity/Frontliners.Identity.csproj"
+COPY ["src/services/Frontliners.Identity/Frontliners.Identity.csproj", "src/services/Frontliners.Identity/"]
+COPY ["src/shared/Frontliners.Common/Frontliners.Common.csproj", "src/shared/Frontliners.Common/"]
+COPY ["src/shared/Frontliners.Contract/Frontliners.Contract.csproj", "src/shared/Frontliners.Contract/"]
+RUN dotnet restore "src/services/Frontliners.Identity/Frontliners.Identity.csproj"
 COPY . .
-WORKDIR "/src/src/Frontliners.Identity"
+WORKDIR "/src/src/services/Frontliners.Identity"
 RUN dotnet build "Frontliners.Identity.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

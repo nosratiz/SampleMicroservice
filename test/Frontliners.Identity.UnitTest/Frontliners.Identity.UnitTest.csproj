@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Frontliners.Identity\Frontliners.Identity.csproj" />
+      <ProjectReference Include="..\..\src\services\Frontliners.Identity\Frontliners.Identity.csproj" />
     </ItemGroup>
 
 </Project>

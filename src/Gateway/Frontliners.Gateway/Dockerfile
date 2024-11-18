@@ -7,11 +7,11 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Frontliners.Gateway/Frontliners.Gateway.csproj", "src/Frontliners.Gateway/"]
-COPY ["shared/Frontliners.Common/Frontliners.Common.csproj", "shared/Frontliners.Common/"]
-RUN dotnet restore "src/Frontliners.Gateway/Frontliners.Gateway.csproj"
+COPY ["src/Gateway/Frontliners.Gateway/Frontliners.Gateway.csproj", "src/Gateway/Frontliners.Gateway/"]
+COPY ["src/shared/Frontliners.Common/Frontliners.Common.csproj", "src/shared/Frontliners.Common/"]
+RUN dotnet restore "src/Gateway/Frontliners.Gateway/Frontliners.Gateway.csproj"
 COPY . .
-WORKDIR "/src/src/Frontliners.Gateway"
+WORKDIR "/src/src/Gateway/Frontliners.Gateway"
 RUN dotnet build "Frontliners.Gateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

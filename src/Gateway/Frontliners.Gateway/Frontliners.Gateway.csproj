@@ -5,22 +5,21 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-      <UserSecretsId>ef8636cc-ab55-4a07-a893-53e5172f1f29</UserSecretsId>
+      <UserSecretsId>261ce690-6f9b-4fa7-8aa9-51da348f42fe</UserSecretsId>
   </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapster" Version="7.4.0" />
-        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
+        <PackageReference Include="MMLib.SwaggerForOcelot" Version="8.3.2" />
+        <PackageReference Include="Ocelot" Version="23.3.6" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\shared\Frontliners.Common\Frontliners.Common.csproj" />
-      <ProjectReference Include="..\..\shared\Frontliners.Contract\Frontliners.Contract.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\..\.dockerignore">
+      <Content Include="..\..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>

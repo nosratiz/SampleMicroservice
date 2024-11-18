@@ -4,12 +4,13 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-      <UserSecretsId>f5442282-2369-4ca1-b48c-5181deba89ec</UserSecretsId>
-      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+      <UserSecretsId>ef8636cc-ab55-4a07-a893-53e5172f1f29</UserSecretsId>
   </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
@@ -19,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\..\.dockerignore">
+      <Content Include="..\..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>

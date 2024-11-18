@@ -4,22 +4,22 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-      <UserSecretsId>261ce690-6f9b-4fa7-8aa9-51da348f42fe</UserSecretsId>
+      <UserSecretsId>f5442282-2369-4ca1-b48c-5181deba89ec</UserSecretsId>
+      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MMLib.SwaggerForOcelot" Version="8.3.2" />
-        <PackageReference Include="Ocelot" Version="23.3.6" />
+        <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\shared\Frontliners.Common\Frontliners.Common.csproj" />
+      <ProjectReference Include="..\..\shared\Frontliners.Contract\Frontliners.Contract.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\..\.dockerignore">
+      <Content Include="..\..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>

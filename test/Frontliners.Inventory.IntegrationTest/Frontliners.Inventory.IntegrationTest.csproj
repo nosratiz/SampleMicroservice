@@ -26,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Frontliners.Inventory\Frontliners.Inventory.csproj" />
+      <ProjectReference Include="..\..\src\services\Frontliners.Inventory\Frontliners.Inventory.csproj" />
     </ItemGroup>
 
 </Project>
