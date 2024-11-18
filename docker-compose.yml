@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+  
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  gateway:
+    image: frontliners.gateway
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: src/Gateway/Frontliners.Gateway/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+      - rabbitmq
+      - frontliners.identity
+      - frontliners.inventory
+      - frontliners.order
+  
+  frontliners.identity:
+    image: frontliners.identity
+    container_name: identity
+    ports:
+      - "5130:8080"
+    build:
+      context: .
+      dockerfile: src/services/Frontliners.Identity/Dockerfile
+    depends_on:
+      - mongodb
+      - rabbitmq
+      - frontliners.order
+
+  frontliners.inventory:
+    image: frontliners.inventory
+    container_name: inventory
+    ports:
+      - "5166:8080"
+    build:
+      context: .
+      dockerfile: src/services/Frontliners.Inventory/Dockerfile
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+  frontliners.order:
+    image: frontliners.order
+    container_name: order
+    ports:
+      - "5288:8080"
+    build:
+      context: .
+      dockerfile: src/services/Frontliners.Order/Dockerfile
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+volumes:
+  mongo-data:
+

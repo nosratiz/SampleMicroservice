@@ -24,11 +24,10 @@ await mediator.Send(new SeedDataCommand(), CancellationToken.None);
 
 app.UseSerilogRequestLogging();
 
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 app.UseExceptionHandler();
 
 app.UseHttpsRedirection();

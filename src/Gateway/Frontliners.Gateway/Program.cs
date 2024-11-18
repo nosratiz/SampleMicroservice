@@ -27,8 +27,7 @@ var app = builder.Build();
 
 app.UseSerilogRequestLogging();
 
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerForOcelotUI(opt =>
     {
@@ -37,9 +36,6 @@ if (app.Environment.IsDevelopment())
 
     app.UseSwaggerUI();
 
-}
-
-app.UseMiddleware<TokenValidatorMiddleware>();
 
 app.UseHttpsRedirection();
 

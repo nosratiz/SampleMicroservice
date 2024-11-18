@@ -2,22 +2,17 @@
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5130
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/services/Frontliners.Identity/Frontliners.Identity.csproj", "src/services/Frontliners.Identity/"]
-COPY ["src/shared/Frontliners.Common/Frontliners.Common.csproj", "src/shared/Frontliners.Common/"]
-COPY ["src/shared/Frontliners.Contract/Frontliners.Contract.csproj", "src/shared/Frontliners.Contract/"]
-RUN dotnet restore "src/services/Frontliners.Identity/Frontliners.Identity.csproj"
 COPY . .
-WORKDIR "/src/src/services/Frontliners.Identity"
-RUN dotnet build "Frontliners.Identity.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet restore "src/Services/Frontliners.Identity/Frontliners.Identity.csproj"
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Frontliners.Identity.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "src/Services/Frontliners.Identity/Frontliners.Identity.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

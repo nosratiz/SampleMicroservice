@@ -6,5 +6,4 @@ public interface ICurrentUserService : IBaseService
 {
     string? UserId { get; }
     
-    List<string> Roles { get; }
 }

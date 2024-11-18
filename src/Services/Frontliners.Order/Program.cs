@@ -13,11 +13,12 @@ builder.Services.AddOrderService(builder.Configuration);
 var app = builder.Build();
 
 app.UseSerilogRequestLogging();
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
+
+
 app.UseExceptionHandler();
 app.UseHttpsRedirection();
 

@@ -14,6 +14,12 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+
+
     <ItemGroup>
       <ProjectReference Include="..\..\shared\Frontliners.Common\Frontliners.Common.csproj" />
       <ProjectReference Include="..\..\shared\Frontliners.Contract\Frontliners.Contract.csproj" />

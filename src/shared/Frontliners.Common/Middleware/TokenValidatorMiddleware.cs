@@ -4,19 +4,23 @@ using Frontliners.Common.InfraStructure;
 using Frontliners.Common.InfraStructure.Extensions;
 using Frontliners.Common.Options;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Frontliners.Common.Middleware;
 
-public class TokenValidatorMiddleware(RequestDelegate next, IOptions<JwtSettings> jwtSettings)
+public class TokenValidatorMiddleware(RequestDelegate next, IOptions<JwtSettings> jwtSettings,ILogger<TokenValidatorMiddleware> logger)
 {
     public async Task Invoke(HttpContext httpContext)
     {
         if (httpContext.HasAuthorization())
         {
             var token = httpContext.GetAuthorizationToken();
+            
             var secretKey = Encoding.UTF8.GetBytes(jwtSettings.Value.SecretKey);
+            
+            logger.LogInformation("Token: {token}", token);
 
             var validationParameters = new TokenValidationParameters
                 

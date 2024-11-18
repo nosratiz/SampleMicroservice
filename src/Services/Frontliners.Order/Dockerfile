@@ -2,22 +2,17 @@
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5288
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/services/Frontliners.Order/Frontliners.Order.csproj", "src/services/Frontliners.Order/"]
-COPY ["src/shared/Frontliners.Common/Frontliners.Common.csproj", "src/shared/Frontliners.Common/"]
-COPY ["src/shared/Frontliners.Contract/Frontliners.Contract.csproj", "src/shared/Frontliners.Contract/"]
-RUN dotnet restore "src/services/Frontliners.Order/Frontliners.Order.csproj"
 COPY . .
-WORKDIR "/src/src/services/Frontliners.Order"
-RUN dotnet build "Frontliners.Order.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet restore "src/Services/Frontliners.Order/Frontliners.Order.csproj"
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Frontliners.Order.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "src/Services/Frontliners.Order/Frontliners.Order.csproj" -c Release -o /app/publish 
 
 FROM base AS final
 WORKDIR /app

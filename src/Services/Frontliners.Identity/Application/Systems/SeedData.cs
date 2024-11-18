@@ -1,9 +1,11 @@
 using Frontliners.Common.Mongo.Repository;
+using Frontliners.Contract.Users;
 using Frontliners.Identity.Domain.Entities;
+using MassTransit;
 
 namespace Frontliners.Identity.Application.Systems;
 
-public class SeedData(IMongoRepository<User> userRepository)
+public class SeedData(IMongoRepository<User> userRepository,IPublishEndpoint publishEndpoint)
 {
     public async Task SeedAsync(CancellationToken cancellationToken)
     {
@@ -17,6 +19,8 @@ public class SeedData(IMongoRepository<User> userRepository)
             user.Activate();
             
             await userRepository.AddAsync(user, cancellationToken);
+            
+            await publishEndpoint.Publish(new UserCreated(user.Id, user.Email, user.FirstName, user.LastName), cancellationToken);
         }
     }
 }
