@@ -2,25 +2,6 @@
 
 This solution demonstrates a microservices architecture using .NET, implementing CQRS pattern, MediatR, Ocelot API Gateway, MassTransit, MongoDB, and comprehensive testing approaches.
 
-## 🏗️ Architecture Overview
-
-```
-├── src/
-│   ├── Gateway/
-│   │   └── API.Gateway
-│   ├── Services/
-│   │   ├── Service.A/
-│   │   ├── Service.B/
-│   │   └── Service.C/
-│   └── Shared/
-│       ├── Common.Logging
-│       ├── Common.Security
-│       └── Common.MongoDB
-├── tests/
-│   ├── Service.A.Tests/
-│   ├── Service.B.Tests/
-│   └── Service.C.Tests/
-└── docker-compose.yml
 ```
 
 ## 🚀 Technologies
@@ -218,20 +199,6 @@ public sealed class ProductsEndpointTest(CustomWebApplicationFactory<Program> fa
 }
 ```
 
-## 📦 Shared Package
-
-The shared projects are packaged as NuGet packages. To create and use:
-
-1. Package creation:
-```bash
-cd src/Shared/Common.Logging
-dotnet pack -c Release
-```
-
-2. Package usage:
-```xml
-<PackageReference Include="Common.Logging" Version="1.0.0" />
-```
 
 
 ## 📝 License
